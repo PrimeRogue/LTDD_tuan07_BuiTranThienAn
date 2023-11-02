@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -45,6 +46,8 @@ const itemList = [
   },
 ];
 export default function Screen01() {
+  const [isHovered, setIsHovered] = useState(false);
+  const [indexPress, setIndexPress] = useState();
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
@@ -63,33 +66,48 @@ export default function Screen01() {
       </Text>
       <View style={styles.itemContainer}>
         {itemList.map((item, index) => (
-          <View style={styles.item} key={index}>
-            <Image
-              source={item.image}
-              style={{ width: 75, height: 75 }}
-            ></Image>
+          <TouchableOpacity
+            onPress={() => {
+              setIsHovered(true);
+              setIndexPress(index);
+            }}
+          >
             <View
-              style={{
-                position: "absolute",
-                left: 90,
-                alignSelf: "flex-start",
-              }}
+              style={[
+                styles.item,
+                isHovered && indexPress == index ? styles.itemHovered : null,
+              ]}
+              key={index}
             >
-              <Text style={{ fontSize: 18, color: "black" }}>{item.name}</Text>
-              <Text style={{ fontSize: 18, color: "red" }}>{item.shop}</Text>
+              <Image
+                source={item.image}
+                style={{ width: 75, height: 75 }}
+              ></Image>
+              <View
+                style={{
+                  position: "absolute",
+                  left: 90,
+                  alignSelf: "flex-start",
+                }}
+              >
+                <Text style={{ fontSize: 18, color: "black" }}>
+                  {item.name}
+                </Text>
+                <Text style={{ fontSize: 18, color: "red" }}>{item.shop}</Text>
+              </View>
+              <TouchableOpacity
+                style={{
+                  padding: 15,
+                  backgroundColor: "#F31111",
+                  width: 100,
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Text style={{ fontSize: 18, color: "white" }}>Chat</Text>
+              </TouchableOpacity>
             </View>
-            <TouchableOpacity
-              style={{
-                padding: 15,
-                backgroundColor: "#F31111",
-                width: 100,
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Text style={{ fontSize: 18, color: "white" }}>Chat</Text>
-            </TouchableOpacity>
-          </View>
+          </TouchableOpacity>
         ))}
       </View>
       <View style={styles.footerContainer}>
@@ -146,6 +164,19 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 5,
     borderBottomWidth: 1,
+  },
+
+  itemHovered: {
+    padding: 5,
+    paddingRight: 20,
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    gap: 5,
+    borderBottomWidth: 1,
+    backgroundColor: "#fff",
+    transform: "scale(1.1)",
   },
   footerContainer: {
     width: "100%",

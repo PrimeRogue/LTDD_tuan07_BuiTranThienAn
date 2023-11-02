@@ -7,6 +7,43 @@ import {
   TouchableOpacity,
 } from "react-native";
 
+const itemList = [
+  {
+    image: require("./assets/imageItem1.png"),
+    shop: "Devang",
+    name: "Ca nấu lẩu, nấu mì mini",
+  },
+  {
+    image: require("./assets/imageItem2.png"),
+    shop: "LTD Food",
+    name: "1KG Khô gà bơ tỏi",
+  },
+  {
+    image: require("./assets/imageItem3.png"),
+    shop: "Thế giới đồ chơi",
+    name: "Xe cẩu đa năng",
+  },
+  {
+    image: require("./assets/imageItem4.png"),
+    shop: "Thế giới đồ chơi",
+    name: "Đồ chơi dạng mô hình",
+  },
+  {
+    image: require("./assets/imageItem5.png"),
+    shop: "Minh Long Book",
+    name: "Lãnh đạo đơn giản",
+  },
+  {
+    image: require("./assets/imageItem6.png"),
+    shop: "Minh Long Book",
+    name: "Hiểu lòng con trẻ",
+  },
+  {
+    image: require("./assets/imageItem6.png"),
+    shop: "Minh Long Book",
+    name: "Donal Trump Thiên tài lãnh đạo",
+  },
+];
 export default function Screen01() {
   return (
     <View style={styles.container}>
@@ -25,29 +62,35 @@ export default function Screen01() {
         Bạn có thắc mắc với sản phẩm vừa xem đừng ngại chát với shop!
       </Text>
       <View style={styles.itemContainer}>
-        <View style={styles.item}>
-          <Image
-            source={require("./assets/imageItem1.png")}
-            style={{ width: 75, height: 75 }}
-          ></Image>
-          <View
-            style={{ position: "absolute", left: 90, alignSelf: "flex-start" }}
-          >
-            <Text style={{ fontSize: 18, color: "black" }}>Chat</Text>
-            <Text style={{ fontSize: 18, color: "red" }}>Chat</Text>
+        {itemList.map((item, index) => (
+          <View style={styles.item} key={index}>
+            <Image
+              source={item.image}
+              style={{ width: 75, height: 75 }}
+            ></Image>
+            <View
+              style={{
+                position: "absolute",
+                left: 90,
+                alignSelf: "flex-start",
+              }}
+            >
+              <Text style={{ fontSize: 18, color: "black" }}>{item.name}</Text>
+              <Text style={{ fontSize: 18, color: "red" }}>{item.shop}</Text>
+            </View>
+            <TouchableOpacity
+              style={{
+                padding: 15,
+                backgroundColor: "#F31111",
+                width: 100,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Text style={{ fontSize: 18, color: "white" }}>Chat</Text>
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity
-            style={{
-              padding: 15,
-              backgroundColor: "#F31111",
-              width: 100,
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Text style={{ fontSize: 18, color: "white" }}>Chat</Text>
-          </TouchableOpacity>
-        </View>
+        ))}
       </View>
       <View style={styles.footerContainer}>
         <Image
@@ -77,7 +120,7 @@ const styles = StyleSheet.create({
   headerContainer: {
     width: "100%",
     backgroundColor: "#1BA9FF",
-    position: "absolute",
+    position: "fixed",
     top: 0,
     left: 0,
     padding: 20,
@@ -107,7 +150,7 @@ const styles = StyleSheet.create({
   footerContainer: {
     width: "100%",
     backgroundColor: "#1BA9FF",
-    position: "absolute",
+    position: "fixed",
     bottom: 0,
     left: 0,
     padding: 20,

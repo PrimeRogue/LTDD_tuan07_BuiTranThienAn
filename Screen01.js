@@ -39,7 +39,7 @@ const itemList = [
     name: "Hiểu lòng con trẻ",
   },
   {
-    image: require("./assets/imageItem6.png"),
+    image: require("./assets/imageItem7.png"),
     shop: "Minh Long Book",
     name: "Donal Trump Thiên tài lãnh đạo",
   },
